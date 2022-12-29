@@ -1,0 +1,348 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "UltraAnalytics API Suite",
+    "version": "1.0.0",
+    "title": "UltraAnalytics API",
+    "contact": {
+      "email": "prateek.singh@ultragenicglobal.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "schemes": ["https", "http"],
+  "securityDefinitions": {
+    "JWT": {
+      "type": "apiKey",
+      "name": "token",
+      "in": "header"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/v1",
+  "paths": {
+    "/user/login": {
+      "post": {
+        "tags": ["User Module"],
+        "summary": "Login in UI",
+        "description": "Login in UI",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "login object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/loginRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login Successful",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/response"
+            }
+          },
+          "201": {
+            "description": "Invalid Credential"
+          },
+          "202": {
+            "description": "Invalid Payload"
+          },
+          "204": {
+            "description": "Inactive Account"
+          }
+        }
+      }
+    },
+    "/clientAdmin/add": {
+      "post": {
+        "tags": ["Client Admin Module"],
+        "summary": "Add client admin",
+        "description": "Add client admin",
+        "security": [{ "JWT": [] }],
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Add Client Admin Object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/addClientAdminRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Client Admin added Successfully",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/response"
+            }
+          },
+          "301": {
+            "description": "Invalid First name"
+          },
+          "302": {
+            "description": "Invalid email"
+          },
+          "303": {
+            "description": "Invalid mobile"
+          },
+          "304": {
+            "description": "Email already exist"
+          },
+          "305": {
+            "description": "Employee ID already exist"
+          },
+          "306": {
+            "description": "Invlaid Client Admin ID"
+          },
+          "307": {
+            "description": "Invalid Last name"
+          },
+          "308": {
+            "description": "Invalid designation"
+          },
+          "309": {
+            "description": "Invalid password"
+          },
+          "403": {
+            "description": "permission denied"
+          },
+          "505": {
+            "description": "some error occurred"
+          }
+        }
+      }
+    },
+    "/clientAdmin/update": {
+      "patch": {
+        "tags": ["Client Admin Module"],
+        "summary": "Update client admin",
+        "description": "Update client admin",
+        "security": [{ "JWT": [] }],
+
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Update Client Admin Object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/updateClientAdminRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Client Admin updated Successfully",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/response"
+            }
+          }
+        }
+      }
+    },
+    "/clientAdmin/view/{id}": {
+      "get": {
+        "tags": ["Client Admin Module"],
+        "summary": "View Client Admin in UI",
+        "description": "View Client Admin in UI",
+        "security": [{ "JWT": [] }],
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Client admin ID need to be viewed",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Client Admin Data",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/response"
+            }
+          }
+        }
+      }
+    },
+    "/clientAdmin/list": {
+      "get": {
+        "tags": ["Client Admin Module"],
+        "summary": "List Client Admin in UI",
+        "description": "List Client Admin in UI",
+        "security": [{ "JWT": [] }],
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Client Admin Data",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/response"
+            }
+          }
+        }
+      }
+    },
+    "/clientAdmin/delete": {
+      "delete": {
+        "tags": ["Client Admin Module"],
+        "summary": "View Client Admin in UI",
+        "description": "View Client Admin in UI",
+        "security": [{ "JWT": [] }],
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Delete Client Admin Object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/deleteClientAdminRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Client Admin deleted successfully",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/response"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "loginRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "tokenHeader": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "addClientAdminRequest": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "emloyeeId": {
+          "type": "string"
+        },
+        "designation": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "status": {
+          "type": "number"
+        }
+      }
+    },
+    "updateClientAdminRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "emloyeeId": {
+          "type": "string"
+        },
+        "designation": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "status": {
+          "type": "number"
+        }
+      }
+    },
+    "deleteClientAdminRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "code": {
+          "type": "number"
+        },
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}
