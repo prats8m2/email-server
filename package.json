@@ -8,7 +8,7 @@
     "prebuild": "eslint --fix . --ext .ts && prettier --write \"**/*.+(js|ts|json)\"",
     "clean": "rm -rf ./dist",
     "copy-files": "mkdir ./dist/public && ncp ./public ./dist/public",
-    "build": " tsc && npm run copy-files",
+    "build": "npm run clean && tsc && npm run copy-files",
     "prestart": "npm run build",
     "start": "node ./dist/src/app.js",
     "test": "mocha test/*",
