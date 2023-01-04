@@ -8,7 +8,7 @@
     "prebuild": "eslint --fix . --ext .ts && prettier --write \"**/*.+(js|ts|json)\"",
     "clean": "rm -rf ./dist",
     "copy-files": "mkdir ./dist/public && ncp ./public ./dist/public",
-    "build": "npm run clean && tsc && npm run copy-files",
+    "build": "npm run clean tsc && npm run copy-files",
     "prestart": "npm run build",
     "start": "node ./dist/src/app.js",
     "test": "mocha test/*",
@@ -24,7 +24,8 @@
     "ts-node": "ts-node",
     "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
     "typeorm:create": "npm run typeorm migration:create -- -n userMigration",
-    "typeorm:run": "npm run typeorm migration:run -- -n userMigration"
+    "typeorm:run": "npm run typeorm migration:run -- -n userMigration",
+    "ncp": "^2.0.0"
   },
   "keywords": [],
   "author": "",
