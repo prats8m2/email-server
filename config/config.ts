@@ -78,7 +78,7 @@ export const EMAIL_CONFIG = {
   pass: process.env.EMAIL_CONFIG_PASS, // ses password
 };
 
-export const UG_EMAIL = 'uan@ultragenicglobal.com';
+export const PR_EMAIL = 'prshoot24@gmail.com';
 export const SNOWFLAKE_AUTHENTICATOR = 'SNOWFLAKE';
 export const SNOWFLAKE = 'SNOWFLAKE';
 export const ETL_META_DATA_DB = 'meta_db';

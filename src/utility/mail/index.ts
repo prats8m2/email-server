@@ -1,13 +1,13 @@
-import { EMAIL_CONFIG, UG_EMAIL } from '../../../config/config';
+import { EMAIL_CONFIG, PR_EMAIL } from '../../../config/config';
 import nodemailer from 'nodemailer';
-import Logger from '../logger';
+
 // Responsible for sending mail
 const sendEmail = async (emailTo: string, subject: string, content: string) => {
   const connection = createEmailConnection();
   await connection
     .sendMail({
-      from: UG_EMAIL,
-      to: emailTo,
+      from: PR_EMAIL,
+      to: PR_EMAIL,
       subject: subject,
       html: content,
     })
@@ -16,7 +16,7 @@ const sendEmail = async (emailTo: string, subject: string, content: string) => {
       return true;
     })
     .catch(err => {
-      Logger.error(err);
+      console.error(err);
       return false;
     });
 };

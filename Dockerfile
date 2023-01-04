@@ -3,9 +3,6 @@ FROM node:16.17.0-bullseye-slim
 # Create app directory
 WORKDIR /usr/src/app
 
-# Install app dependencies
-RUN apt-get update && apt-get install -y curl
-
 # where available (npm@5+)
 COPY package*.json ./
 
